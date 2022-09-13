@@ -23,5 +23,8 @@ services:
   frontend:
     build:
       context: ./frontend
+    command: npm run dev
+    volumes:
+      - ./frontend:/app
     ports:
       - "3000:3000"
