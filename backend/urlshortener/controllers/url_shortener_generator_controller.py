@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from textwrap import shorten
 from urlshortener.serializers.shortened_url import ShortenedURLSerializer
 from urlshortener.controllers.base_controller import ControllerResult
 from urlshortener.services.url_hasher.url_hasher import URLHasher
