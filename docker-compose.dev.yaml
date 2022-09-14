@@ -28,3 +28,8 @@ services:
       - ./frontend:/app
     ports:
       - "3000:3000"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
