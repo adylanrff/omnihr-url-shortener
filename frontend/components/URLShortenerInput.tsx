@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { RefObject } from 'react'
 
 type Props = {
+    inputRef?: RefObject<HTMLInputElement>
     onSubmit?: () => void
-    onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-function URLShortenerInput({ onSubmit, onInputChange }: Props) {
+function URLShortenerInput({ inputRef, onSubmit }: Props) {
     return (
         <div className="flex flex-col w-full md:w-1/3 items-center gap-5 rounded-lg border border-gray-200 shadow-sm p-5">
             <input
                 type="text"
+                ref={inputRef}
                 className="textinput"
                 placeholder="https://google.com"
-                onChange={onInputChange}
                 required
             />
             <button

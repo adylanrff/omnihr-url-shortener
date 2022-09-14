@@ -1,8 +1,19 @@
-type ShortenURLRequest = {
+type CreateShortenedURLRequest = {
     full_url: string
 }
 
-type ShortenURLResponse = {
+type CreateShortenedURLResponse = {
+    id?: string
+    expiry_time?: Date
+    hash?: string
+    full_url?: string
+}
+
+type GetShortenedURLDetailRequest = {
+    hash: string
+}
+
+type GetShortenedURLDetailResponse = {
     id?: string
     expiry_time?: Date
     hash?: string
@@ -16,8 +27,8 @@ export class URLShortenerService {
         this.host = host
     }
 
-    async shortenURL(request: ShortenURLRequest): Promise<ShortenURLResponse> {
-        const shortenURLPath = this.host + "/shorten/"
+    async createShortenedURL(request: CreateShortenedURLRequest): Promise<CreateShortenedURLResponse> {
+        const shortenURLPath = this.host + "/shortened_url/"
         const payload = JSON.stringify(request)
         console.log(payload)
         const response = await fetch(shortenURLPath, {
@@ -28,6 +39,16 @@ export class URLShortenerService {
             body: payload
         })
 
+        if (Math.floor(response.status / 100) !== 2) {
+            throw new Error(response.statusText)
+        }
+
+        return response.json()
+    }
+
+    async getShortenedURLDetail(request: GetShortenedURLDetailRequest): Promise<GetShortenedURLDetailResponse> {
+        const shortenURLPath = this.host + "/shortened_url?hash=" + request.hash
+        const response = await fetch(shortenURLPath)
         if (Math.floor(response.status / 100) !== 2) {
             throw new Error(response.statusText)
         }

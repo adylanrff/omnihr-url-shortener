@@ -16,8 +16,8 @@ function SuccessModal({ show, onConfirmClicked, hash }: Props) {
             show={show}
             onConfirmClicked={onConfirmClicked}
         >
-            <p>You can access your URL at
-                <a className="hover:underline text-blue-600 hover:text-blue-700" href={`localhost:3000/${hash}`}> localhost:3000/{hash} </a></p>
+            <p>You can access your URL at</p>
+            <a className="hover:underline text-blue-600 hover:text-blue-700" href={`http://localhost:3000/${hash}`}> localhost:3000/{hash} </a>
         </Modal>
     )
 }

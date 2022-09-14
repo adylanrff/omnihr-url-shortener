@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
+import { createRef, useState } from 'react'
 import FailedModal from '../components/FailedModal'
-import Modal from '../components/Modal'
 import SuccessModal from '../components/SuccessModal'
 import URLShortenerInput from '../components/URLShortenerInput'
 import { URLShortenerService } from '../services/URLShortener'
@@ -20,25 +19,22 @@ const Home: NextPage = () => {
   }
 
   // URL Shorteners
-  const [url, setUrl] = useState("")
   const [hash, setHash] = useState("")
+  const inputRef = createRef<HTMLInputElement>()
 
   const onURLShortenerSubmit = () => {
-    const service = new URLShortenerService()
-    service.shortenURL({
-      full_url: url
-    }).then((data) => {
-      setHash(data.hash || "")
-      setShouldShowSuccessModal(true)
-    }).catch((data) => {
-      console.error(data)
-      setShouldShowFailedModal(true)
-    })
-  }
-
-  const onURLShortenerInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setUrl(e.target.value)
+    if (inputRef.current) {
+      const service = new URLShortenerService()
+      service.createShortenedURL({
+        full_url: inputRef.current.value
+      }).then((data) => {
+        setHash(data.hash || "")
+        setShouldShowSuccessModal(true)
+      }).catch((data) => {
+        console.error(data)
+        setShouldShowFailedModal(true)
+      })
+    }
   }
 
   return (
@@ -57,7 +53,7 @@ const Home: NextPage = () => {
 
           <URLShortenerInput
             onSubmit={onURLShortenerSubmit}
-            onInputChange={onURLShortenerInputChange}
+            inputRef={inputRef}
           />
         </div>
       </main >
