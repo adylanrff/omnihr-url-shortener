@@ -16,6 +16,7 @@ const HashRedirectionPage: NextPage = () => {
                 location.replace(data.full_url || "")
             }).catch((e) => {
                 console.error(e)
+                location.replace("/404")
             })
         }
 
@@ -25,5 +26,6 @@ const HashRedirectionPage: NextPage = () => {
         <div className="text-center">Redirecting...</div>
     )
 }
+
 
 export default HashRedirectionPage;
