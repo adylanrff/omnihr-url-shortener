@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
     env_file:
-      - .env
+      - ./backend/.env.local
     ports:
       - "8000:8000"
     restart: always
@@ -28,6 +28,8 @@ services:
       - ./frontend:/app
     ports:
       - "3000:3000"
+    env_file:
+      - ./frontend/.env
   adminer:
     image: adminer
     restart: always

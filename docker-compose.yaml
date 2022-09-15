@@ -10,14 +10,23 @@ services:
   backend:
     build:
       context: ./backend
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     depends_on:
       - db
     env_file:
-      - .env
+      - ./backend/.env
   frontend:
     build:
       context: ./frontend
     command: npm start
     ports:
       - "3000:3000"
+    env_file:
+      - ./frontend/.env
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - 8000:80 # Can change to other port if you want
+    depends_on:
+      - backend

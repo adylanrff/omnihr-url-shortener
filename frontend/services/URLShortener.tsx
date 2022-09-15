@@ -23,14 +23,13 @@ type GetShortenedURLDetailResponse = {
 export class URLShortenerService {
     host: string;
 
-    constructor(host: string = "http://localhost:8000") {
+    constructor(host: string = process.env.NEXT_PUBLIC_BACKEND_URL || "") {
         this.host = host
     }
 
     async createShortenedURL(request: CreateShortenedURLRequest): Promise<CreateShortenedURLResponse> {
         const shortenURLPath = this.host + "/shortened_url/"
         const payload = JSON.stringify(request)
-        console.log(payload)
         const response = await fetch(shortenURLPath, {
             method: "POST",
             headers: {
