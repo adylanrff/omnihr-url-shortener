@@ -46,7 +46,7 @@ docker compose -f docker-compose.dev.yaml up
 
 ## Preview
 
-![](https://github.com/adylanrff/omnihr-url-shortener/docs/urlshortener-demo.gif)
+![](https://github.com/adylanrff/omnihr-url-shortener/tree/main/docs/urlshortener-demo.gif)
 
 
 ## Improvement Points
