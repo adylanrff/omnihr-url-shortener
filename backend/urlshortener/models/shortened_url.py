@@ -13,5 +13,4 @@ class ShortenedURL(models.Model):
     class Meta:
         indexes = [
             models.Index(fields=['hash'], name='hash_idx'),
-            models.Index(fields=['full_url'], name='full_url_idx'),
         ]
